@@ -1,0 +1,28 @@
+{
+  "type" : "record",
+  "name" : "root",
+  "namespace" : "com.avro.main",
+  "fields" : [ {
+    "name" : "foo",
+    "type" : "string"
+  }, {
+    "name" : "bar",
+    "type" : "string"
+  }, {
+    "name" : "UnknownFields",
+    "type" : {
+      "type" : "array",
+      "items" : {
+        "type" : "record",
+        "name" : "subroot",
+        "fields" : [ {
+          "name" : "elementName",
+          "type" : "string"
+        }, {
+          "name" : "elementValue",
+          "type" : "string"
+        } ]
+      }
+    }
+  } ]
+}
