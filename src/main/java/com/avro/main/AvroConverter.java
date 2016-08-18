@@ -131,7 +131,14 @@ public class AvroConverter {
                     fieldType.equalsIgnoreCase("double") ||
                     fieldType.equalsIgnoreCase("XMLGregorianCalendar"))
             {
-                String fieldName = field.getAnnotation(XmlElement.class) != null?field.getAnnotation(XmlElement.class).name():field.getName();
+                String fieldName = "";
+                if(field.getAnnotation(XmlElement.class) != null &&
+                        field.getAnnotation(XmlElement.class).name() != null &&
+                        !field.getAnnotation(XmlElement.class).name().equals("##default")){
+                    fieldName = field.getAnnotation(XmlElement.class).name();
+                }else{
+                    fieldName = field.getName();
+                }
                 String fieldValue = field.get(obj) == null ? "" : field.get(obj).toString();
                 if(jObject != null)jObject.put(fieldName, fieldValue);
                 if(schemaBuilder != null)schemaBuilder.name(fieldName).type().stringType().noDefault();
